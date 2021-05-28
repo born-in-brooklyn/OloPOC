@@ -72,5 +72,13 @@ namespace OloPOC.PostsTests
             actual["userId"].Should().Equals(firstPost["userId"]);
         }
 
+        [Fact]
+        public void GetAllExecutesInLessThan500ms()
+        {
+            var start = DateTime.Now;
+            var firstPost = Fixture.GetFirstPost();
+            var end = DateTime.Now;
+            end.Subtract(start).Should().BeLessOrEqualTo(TimeSpan.FromMilliseconds(500));
+        }
     }
 }

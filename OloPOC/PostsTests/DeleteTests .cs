@@ -21,17 +21,10 @@ namespace OloPOC.PostsTests
             Fixture = fixture;
         }
 
-        private IRestResponse Delete(object postId)
-        {
-            var request = new RestRequest("posts/{id}", Method.DELETE);
-            request.AddUrlSegment("id", postId);
-            return Fixture.Client.Execute(request);
-        }
-
         [Fact]
         public void DeleteReturnsStatusOk()
         {
-            var response = Delete(Fixture.GetFirstPost()["id"]);
+            var response = Fixture.Delete(Fixture.GetFirstPost()["id"]);
             response.StatusCode.Should().Equals(HttpStatusCode.OK);
         }
 
